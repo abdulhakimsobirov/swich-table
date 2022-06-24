@@ -1,0 +1,73 @@
+{% extends 'switch/base.html' %}
+
+{% block content %}
+    <h1 class="my-4">Detail -
+        <small>{{ object.layer }}</small>
+    </h1>
+    <div class="row">
+        <div class="col-12">
+            <ul class="list-group-control">
+              <li class="list-group-item"><strong>Vendor:</strong> {{ object.vendor }}</li>
+              <li class="list-group-item"><strong>Model:</strong> {{ object.model }}</li>
+              <li class="list-group-item"><strong>Layer:</strong> {{ object.layer }}</li>
+              <li class="list-group-item"><strong>Downlink:</strong> {{ object.downlink }}</li>
+              <li class="list-group-item"><strong>Copper/Fiber:</strong> {{ object.copper_fiber }}</li>
+              <li class="list-group-item"><strong>PoE:</strong> {{ object.poe }}</li>
+              <li class="list-group-item"><strong>Uplink Model:</strong> {{ object.uplink_model }}</li>
+              <li class="list-group-item"><strong>Uplink:</strong> {{ object.uplink }}</li>
+              <li class="list-group-item"><strong>Copper/Fiber 2:</strong> {{ object.copper_fiber2 }}</li>
+              <li class="list-group-item"><strong>Switching capacity:</strong> {{ object.switching_cap }}</li>
+              <li class="list-group-item"><strong>Forwarding rate:</strong> {{ object.forwarding_rate }}</li>
+              <li class="list-group-item"><strong>Stack:</strong> {{ object.stack }}</li>
+              <li class="list-group-item"><strong>Power Supply:</strong> {{ object.power_supply }}</li>
+              <li class="list-group-item"><strong>Advanced switch capabilities and scale:</strong> {{ object.advanced_cup }}</li>
+              <li class="list-group-item"><strong>Network segmentation:</strong> {{ object.network_eg }}</li>
+              <li class="list-group-item"><strong>L3 functions:</strong> {{ object.l3_function }}</li>
+              {% comment %} <li class="list-group-item"><strong>functions:</strong> {{ object.myfield }}</li> {% endcomment %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="row top-buffer">
+        <div class="col-12">
+                <a href="{% url 'edit_switch' object.id %}"><button type="button" class="btn btn-success">Edit</button></a>
+                <a href="{% url 'switch_list' %}"><button type="button" class="btn btn-secondary">Back</button></a>
+        </div>
+    </div>
+{% endblock %}
+
+{% comment %} 
+Vendor
+Model
+Layer
+Downlink
+Copper/Fiber
+PoE
+Uplink Model
+Uplink
+Copper/Fiber 2
+Switching capacity
+Forwarding rate
+Stack
+Power Supply
+Advanced switch capabilities and scale
+Network segmentation
+L3 functions
+
+vendor
+model
+layer
+downlink
+copper_fiber
+poe
+uplink_model
+uplink
+copper_fiber2
+switching_cap
+forwarding_rate
+stack
+power_supply
+advanced_cup
+network_eg
+l3_function
+ {% endcomment %}

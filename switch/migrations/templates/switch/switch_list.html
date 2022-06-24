@@ -1,0 +1,199 @@
+{% extends 'switch/base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+    <br><h2></h2><hr><br>
+
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+      <table class="table flex" >
+        <form method="GET">
+        <thead>
+          
+          {% comment %} <tr class="filters">
+
+            <form method="GET">
+              {{ tfilter.form | crispy }}
+              <button class="btn btn-primary" >Search</button>
+  
+          </form> {% endcomment %}
+{% comment %}             
+            <th>
+              Vendor
+              {{ filter.form.vendor }}
+                  
+            </th>
+            <th>Layer
+              {{ filter.form.layer }}
+
+            </th>
+            <th>Downlink
+             {{ filter.form.downlink }} 
+
+    
+            </th>
+            <th>PoE
+              {{ filter.form.poe }}
+            </th>
+            <th>Power Supply
+              {{ filter.form.power_supply }}
+            </th>
+            <th>13 function
+              {{ filter.form.l3_function }}
+              <button type="submit" class="btn btn-primary"  value='Filter'> submit</button>
+            </th> {% endcomment %}
+            <th>
+              {{ filter.form }}
+              
+            </th>
+
+          </tr>
+        </thead>
+      </table>
+      <button type="submit" class="btn btn-info float-right"  > submit</button>
+    </form> 
+    
+    <div class="panel panel-primary filterable">
+      <div class="panel-heading text-center">
+        <h1 class="panel-title ">Switch List</h1>
+
+        <div class="pull-right"></div>
+
+      </div>
+      <div class="position-sticky" style="top: 0;">
+     
+        <a class="btn btn-primary btn-lg btn-block position-sticky"  href="{% url 'create_switch' %}">+ create switch</a>
+          
+        
+      
+    </div>
+
+      
+      
+      
+      {% if object_list %}
+        
+            <table class="table">
+              
+                <thead class="table-dark position-sticky" style="top: 0;">
+                  
+                <tr>
+                  
+                    <th scope="col">id</th>
+                    <th scope="col">Vendor</th>
+                    <th scope="col">Model</th>
+                    <th scope="col">Layer</th>
+                    <th scope="col">Downlink</th>
+                    <th scope="col">Copper/Fiber</th>
+                    <th scope="col">PoE</th>
+                    <th scope="col">Uplink Model</th>
+                    <th scope="col">Uplink</th>
+                    <th scope="col">Copper/Fiber 2</th>
+                    <th scope="col">Switching capacity</th>
+                    <th scope="col">Forwarding rate</th>
+                    <th scope="col">Stack</th>
+                    <th scope="col">Power Supply</th>
+                    <th scope="col">Advanced switch capabilities and scale</th>
+                    <th scope="col">Network segmentation</th>
+                    <th scope="col">L3 functions</th>
+                    
+
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+
+                </tr>
+                
+                </thead>
+                
+                <tbody class="table-success fw-bold">
+                  
+                {% for switch in filter.qs %}
+                
+                <tr>
+                    <td class="table-info fw-bold">{{ switch.id }}</td>
+                    <td>{{ switch.vendor }}</td>
+                    <td>{{ switch.model }}</td>
+                    <td>{{ switch.layer }}</td>
+                    <td>{{ switch.downlink }}</td>
+                    <td>{{ switch.copper_fiber }}</td>
+                    <td>{{ switch.poe }}</td>
+                    <td>{{ switch.uplink_model }}</td>
+                    <td>{{ switch.uplink }}</td>
+                    <td>{{ switch.copper_fiber2 }}</td>
+                    <td>{{ switch.switching_cap }}</td>
+                    <td>{{ switch.forwarding_rate }}</td>
+                    <td>{{ switch.stack }}</td>
+                    <td>{{ switch.power_supply }}</td>
+                    <td>{{ switch.advanced_cup }}</td>
+                    <td>{{ switch.network_eg }}</td>
+                    <td>{{ switch.l3_function }}</td>
+
+                    <td class="table-info"><a href="{% url 'switch_view' switch.id %}"><button type="button" class="btn btn-primary btn-sm">View</button></a></td>
+                    <td class="table-danger"><a href="{% url 'delete_switch' switch.id %}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        
+        {% else %}
+        <div class="col-12">
+        <div class="alert alert-warning" role="alert">
+            There is no product, yet. But if you want, you can add from <a class="badge badge-info" href="{% url 'create_switch' %}"><strong>here.</strong></a>
+        </div>
+        </div>
+        {% endif %}
+    </div>
+    <script>
+      console.log(object_list)
+    </script>
+
+
+    
+{% endblock %}
+
+
+{% comment %} 
+# Vendor
+# Model
+Layer
+Downlink
+Copper/Fiber
+PoE
+Uplink Model
+Uplink
+Copper/Fiber 2
+Switching capacity
+Forwarding rate
+Stack
+Power Supply
+Advanced switch capabilities and scale
+Network segmentation
+L3 functions
+
+vendor
+model
+layer
+downlink
+copper_fiber
+poe
+uplink_model
+uplink
+copper_fiber2
+switching_cap
+forwarding_rate
+stack
+power_supply
+advanced_cup
+network_eg
+l3_function
+ {% endcomment %}

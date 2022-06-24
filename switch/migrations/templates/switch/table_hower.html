@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=League+Gothic&display=swap");
+            html,
+            body {
+                height: 100%;
+                overflow: hidden;
+            }
+            
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0;
+                font-family: "League Gothic", sans-serif;
+                background-color: #000000;
+            }
+            .clock {
+                --clock-size: 400px;
+                --hand-color: #535353;
+                height: var(--clock-size);
+                width: var(--clock-size);
+                margin: auto;
+                position: relative;
+                .indicator {
+                    height: calc(var(--clock-size) * 0.5);
+                    position: absolute;
+                    width: 0;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                    transform-origin: bottom;
+                    &::before {
+                        position: absolute;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        margin: auto;
+                        top: -10%;
+                        font-size: 1.5rem;
+                        color: var(--hand-color);
+                        transition: all ease 0.25s;
+                    }
+                    &.active {
+                        &::before {
+                            color: #ffd60a;
+                            text-shadow: 0px 0px #ffd60a;
+                        }
+                    }
+                }
+                @for $i from 0 through 60 {
+                    .indicator:nth-child(#{$i}) {
+                        transform: rotate(#{$i * 360 / 60 * 1deg});
+                        @if $i % 2 == 0 {
+                            &::before {
+                                content: "TICK";
+                            }
+                        } @else {
+                            height: calc(var(--clock-size) * 0.44);
+                            top: calc(var(--clock-size) * 0.06);
+                            &::before {
+                                content: "TOCK";
+                            }
+                        }
+                    }
+                }
+                .time {
+                    --height: 0.1;
+                    --width: 0.3;
+                    height: calc(var(--clock-size) * var(--height));
+                    width: calc(var(--clock-size) * var(--width));
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background-color: #ffffff;
+                    border-radius: 5px;
+                    text-align: center;
+                    border: 1px solid;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 2rem;
+                }
+            }
+            
+
+        </style>
+        </head>
+    <body>
+
+        <div class="clock">
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+            <div class="time">00:00:00</div>
+        </div>
+        <script src="" async defer>
+            const clocks = document.querySelectorAll(".clock");
+
+            clocks.forEach((clock) => {
+                setInterval(() => {
+                    const date = new Date();
+                    const indicators = clock.querySelectorAll(".indicator");
+                    const time = clock.querySelector(".time");
+                    let secondsValue = date.getSeconds();
+                    let minutesValue = date.getMinutes();
+                    let hoursValue = date.getHours();
+                    indicators.forEach((indicator) => {
+                        indicator.classList.remove("active");
+                        indicators[secondsValue].classList.add("active");
+                    });
+                    secondsValue =
+                        secondsValue < 10 ? String(secondsValue).padStart(2, "0") : secondsValue;
+                    minutesValue =
+                        minutesValue < 10 ? String(minutesValue).padStart(2, "0") : minutesValue;
+                    hoursValue =
+                        hoursValue < 10 ? String(hoursValue).padStart(2, "0") : hoursValue;
+            
+                    time.innerHTML = `${hoursValue}:${minutesValue}:${secondsValue}`;
+                }, 1000);
+            });
+            
+        </script>
+    </body>
+</html>
